@@ -5,9 +5,9 @@ from langchain_openai import ChatOpenAI
 
 if __name__ == "__main__":
     print("Hello LangChain!")
-    
-    open_ai_api_key = os.environ['OPENAI_API_KEY']
-    
+
+    open_ai_api_key = os.environ["OPENAI_API_KEY"]
+
     information = """
         Elon Reeve Musk (/ˈiːlɒn/; EE-lon; born June 28, 1971) is a businessman and investor. He is the founder, chairman, CEO, and CTO of SpaceX; angel investor, CEO, product architect, and former chairman of Tesla, Inc.; owner, executive chairman, and CTO of X Corp.; founder of the Boring Company and xAI; co-founder of Neuralink and OpenAI; and president of the Musk Foundation. He is one of the wealthiest people in the world, with an estimated net worth of US$190 billion as of March 2024, according to the Bloomberg Billionaires Index, and $195 billion according to Forbes, primarily from his ownership stakes in Tesla and SpaceX.[5][6]
 
@@ -17,19 +17,21 @@ if __name__ == "__main__":
 
         Musk has expressed views that have made him a polarizing figure.[7] He has been criticized for making unscientific and misleading statements, including COVID-19 misinformation and antisemitic conspiracy theories.[7][8][9][10] His ownership of Twitter has been similarly controversial, being marked by the laying off of a large number of employees, an increase in hate speech and misinformation and disinformation on the website, as well as changes to Twitter Blue verification. In 2018, the U.S. Securities and Exchange Commission (SEC) sued him, alleging that he had falsely announced that he had secured funding for a private takeover of Tesla. To settle the case, Musk stepped down as the chairman of Tesla and paid a $20 million fine.
     """
-    
+
     summary_template = """
         Given the information about a person I want you to create:
         1. A short summary
         2. Two interesting facts about them
     """
-    
-    summary_prompt_template = PromptTemplate(input_variables=["information"], template=summary_template)
-    
+
+    summary_prompt_template = PromptTemplate(
+        input_variables=["information"], template=summary_template
+    )
+
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", api_key=open_ai_api_key)
-    
+
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
-    
-    res = chain.invoke(input={"information":information})
-    
+
+    res = chain.invoke(input={"information": information})
+
     print(res)
