@@ -31,3 +31,5 @@ if __name__ == "__main__":
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
     
     res = chain.invoke(input={"information":information})
+    
+    print(res)
